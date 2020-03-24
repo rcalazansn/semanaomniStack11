@@ -1,0 +1,125 @@
+backend
+	npm init -y
+	npm i express
+	criar aquivo 
+		index.js
+		
+	Código
+		const express = require('express');
+		app.use(express.json());
+
+		const app = express();
+
+		app.get('/', (request, response) => {
+			return response.json({
+				evento: 'Semana OminiStack 11.0',
+				aluno: 'Rodrigo Calans'
+			});
+		});
+
+		app.listen(3333);
+	
+	executar
+		node index.js
+-------------------------------------------	
+	instalar nodemon
+		npm i nodemon -D
+		
+	Ajustar package.json
+		"start": "nodemon index.js"
+	npm start
+---------------------------------------------	
+	Banco de dados SqlLite 
+	http://knexjs.org/
+		npm install knex
+		npm install sqlite3
+		
+		npx knex init
+-------------------------------------------
+	estruturar projeto
+	criar pasta src (raiz)
+		index.js (dentro pasta src)
+		ajustar package.json
+			"start": "nodemon src/index.js"
+		criar aquivo routes.js (dentro src)
+			
+			const express = require('express');
+
+			const routes = express.Router();
+
+			routes.get('/', (request, response) => {
+				const body = request.body;
+				console.log(body);
+
+				return response.json({
+					evento: 'Semana OminiStack 11.0',
+					aluno: 'Rodrigo Calans'
+				});
+			});
+
+			module.exports = routes;
+			
+		Ajustar index.js
+			const express = require('express');
+			const routes = require('./routes');
+
+			const app = express();
+
+			app.use(express.json());
+			app.use(routes);
+
+			app.listen(3333);
+			
+		criar pasta database (src)
+---------------------------------------------------
+		Criar pasta migration dentro da pasta database
+		ajustar aquivo knexfile.js
+			connection: {
+				filename: './src/database/db.sqlite'
+			},
+			migrations: {
+				directory: './src/database/migrations'
+			}
+			npx knex migrate:make create_ongs
+---------------------------------------------------	
+		criar estrutura da tabela arquivo de migration criado
+			return  exports.up = function(knex) {
+				knex.schema.createTable('ongs', function(table) {
+				table.string('id').primary();
+				table.string('name').notNullable();
+				table.string('email').notNullable();
+				table.string('whatsapp').notNullable();
+				table.string('city').notNullable();
+				table.string('uf', 2).notNullable();
+				});
+			};
+
+			exports.down = function(knex) {
+				return knex.schema.dropTable('ongs');
+			};
+	npx knex migrate:run
+	npx knex migrate:latest
+-----------------------------------------	
+	npx knex migrate:make create_incidents
+	
+	exports.up = function(knex) {
+	return knex.schema.createTable('incidents', function(table) {
+		table.increments();
+
+		table.string('title').notNullable();
+		table.string('descriptions').notNullable();
+		table.string('value').notNullable();
+
+		table.string('ong_id').notNullable();
+
+		table.foreign('ong_id').references('id').inTable('ongs');
+		});
+	};
+
+	exports.down = function(knex) {
+		return knex.schema.dropTable('incidents');
+	};
+	npx knex migrate:latest
+--------------------------------------
+	
+	
