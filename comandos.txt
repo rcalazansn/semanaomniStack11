@@ -1,4 +1,4 @@
-backend
+BACKEND
 	npm init -y
 	npm i express
 	criar aquivo 
@@ -122,4 +122,10 @@ backend
 	npx knex migrate:latest
 --------------------------------------
 	
+FRONTEND
+	npx create-react-app frontend
+	npm start
 	
+	npm i react-icons
+	npm i react-router-dom
+	npm i axios
