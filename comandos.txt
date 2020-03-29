@@ -129,3 +129,43 @@ FRONTEND
 	npm i react-icons
 	npm i react-router-dom
 	npm i axios
+	
+--------------------------------------
+MOBILE
+	npm i -g expo-cli
+	expo -h
+		problemas:https://github.com/Rocketseat/expo-common-issues
+		
+	expo init mobile
+		blank (template)
+	
+	cd mobile
+	code .
+	
+	yarn start
+		localhost:19002
+		download app "expo"
+		LER QRCode
+		
+	https://reactnavigation.org/docs/getting-started
+		npm i @react-navigation/native		
+		expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+		npm install @react-navigation/stack
+		npm i expo-constants
+	
+	https://docs.expo.io/versions/latest/sdk/mail-composer/
+		expo install expo-mail-composer
+		
+-----------------------------------------	
+Validação
+	npm i celebrate (joi)
+
+Testes
+	npm i jest
+	npx jest --init
+	
+	npm test
+	
+	npm i cross-env
+	npm i supertest -D
+	
